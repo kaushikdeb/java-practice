@@ -1,3 +1,7 @@
+import java.util.List;
+import java.util.Collections;
+import java.util.Arrays;
+
 class ReverseWords{
 
   public static void main(String args[]){
@@ -10,7 +14,11 @@ class ReverseWords{
 
     System.out.println("Input Sentence recognized: \n" + args[0]);
     System.out.println("The same sentence written by reversing the words: ");
-    System.out.println(reverseWords(args[0]));
+    System.out.println("1. Using split and array ======: " + reverseWords(args[0]));
+    List<String> splitSentence = Arrays.asList(args[0].split("\\s+"));
+    Collections.reverse(splitSentence);
+    System.out.println("2. Using Collections reverse()=: " + String.join(" ", splitSentence));
+    System.out.println("3. Using split and 1/2 Array===: " + reverseHalfArray(args[0]));
   }
 
 
@@ -27,5 +35,15 @@ class ReverseWords{
 
     return reversedWords.toString();
 
+  }
+
+  private static String reverseHalfArray(String input){
+    String[] splitInput = input.split("\\s+");
+    for(int i=0;i<splitInput.length/2;i++){
+      String temp = splitInput[i];
+      splitInput[i] = splitInput[splitInput.length - 1 - i];
+      splitInput[splitInput.length - 1 - i] = temp;
+    }
+    return String.join(" ", splitInput);
   }
 }
