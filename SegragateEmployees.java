@@ -36,18 +36,18 @@ import java.util.HashMap;
 //     }
 // }
 
-record Employee(int eid, String department, String gender){}
+record Employee2(int eid, String department, String gender){}
 
 class SegregateEmployees{
     public static void main(String args[]){
-        List<Employee> employees = createEmployees();
+        List<Employee2> employees = createEmployees();
         printEmployees(employees);
 
         Map<String, Integer> deptCountMap = getDepartmentCountMap(employees);
         printMap(deptCountMap);
 
         Map<String, Map<String, Integer>> deptGenderCountMap = new HashMap<String, Map<String, Integer>>();
-        for(Employee emp : employees){
+        for(Employee2 emp : employees){
             if(deptGenderCountMap.containsKey(emp.department())){
                 Map<String, Integer> genderCountMap = deptGenderCountMap.get(emp.department());
                 if(genderCountMap.containsKey(emp.gender())){
@@ -74,10 +74,10 @@ class SegregateEmployees{
         System.out.println(deptCountMap);
     }
 
-    private static Map<String, Integer> getDepartmentCountMap(List<Employee> employeeList){
+    private static Map<String, Integer> getDepartmentCountMap(List<Employee2> employeeList){
         Map<String, Integer> deptCountMap = new HashMap<String, Integer>();
 
-        for(Employee emp : employeeList){
+        for(Employee2 emp : employeeList){
             if(deptCountMap.containsKey(emp.department())){
                 deptCountMap.put(emp.department(), deptCountMap.get(emp.department()) + 1);
             }else{
@@ -88,20 +88,20 @@ class SegregateEmployees{
         return deptCountMap;
     }
 
-    private static void printEmployees(List<Employee> employeeList){
+    private static void printEmployees(List<Employee2> employeeList){
         System.out.println(employeeList);
     }
 
-    private static List<Employee> createEmployees(){
-        List<Employee> employeeList = new ArrayList<Employee>();
+    private static List<Employee2> createEmployees(){
+        List<Employee2> employeeList = new ArrayList<Employee2>();
 
-        employeeList.add(new Employee(1, "sales", "male"));
-        employeeList.add(new Employee(2, "sales", "male"));
-        employeeList.add(new Employee(3, "hr", "female"));
-        employeeList.add(new Employee(4, "hr", "female"));
-        employeeList.add(new Employee(5, "hr", "male"));
-        employeeList.add(new Employee(6, "engineering", "female"));
-        employeeList.add(new Employee(7, "engineering", "male"));
+        employeeList.add(new Employee2(1, "sales", "male"));
+        employeeList.add(new Employee2(2, "sales", "male"));
+        employeeList.add(new Employee2(3, "hr", "female"));
+        employeeList.add(new Employee2(4, "hr", "female"));
+        employeeList.add(new Employee2(5, "hr", "male"));
+        employeeList.add(new Employee2(6, "engineering", "female"));
+        employeeList.add(new Employee2(7, "engineering", "male"));
 
         return employeeList;
     }

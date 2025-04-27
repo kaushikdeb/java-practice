@@ -54,6 +54,23 @@ public static void main(String args[]){
 
 //  eMap.forEach((dept, map1)->{System.out.println("Employee Map: " + map1)});
 
+eList.stream()
+     .filter(e->e.department().equals("HR"))
+     .collect(Collectors.toList());
+
+eList.stream()
+     .filter(e->e.department().equals("HR") && e.gender().equals("Female"))
+     .collect(Collectors.toList());
+
+eList.stream()
+     .forEach(e->System.out.println(e.department() + ", " + e.name()));
+
+
+Map<String, List<Employee>> myMap = eList.stream()
+     .collect(Collectors.groupingBy(Employee::department));
+
+myMap.forEach((dept, employee)->{System.out.println("Dept: " + dept + " ===> " + employee);});
+
 }
 
 }

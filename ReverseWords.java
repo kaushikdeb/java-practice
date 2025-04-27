@@ -28,10 +28,10 @@ class ReverseWords{
     String[] inputSplit = inputSentence.split("\\s+");
 
     for(int i=inputSplit.length-1;i>=0;i--)
-	reversedWords.append(inputSplit[i]).append(" ");
+	    reversedWords.append(inputSplit[i]).append(" ");
 
     if(reversedWords.length() > 0)
-	reversedWords.setLength(reversedWords.length() - 1);
+	    reversedWords.setLength(reversedWords.length() - 1);
 
     return reversedWords.toString();
 

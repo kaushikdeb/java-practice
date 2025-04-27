@@ -17,7 +17,8 @@ public class SlidingWindowString {
         int left = 0, right = 0;
         int largeLen = large.length();
         int smallLen = small.length();
-        int minLength = Integer.MIN_VALUE, matchedLength = 0;
+        int minLength = Integer.MAX_VALUE;
+        int matchedLength = 0;
         Map<Character, Integer> targetMap = new HashMap<>(); // Contains frequency of each char in small 
         Map<Character, Integer> windowMap = new HashMap<>(); // Contains frequency of each char in the sliding window
 
@@ -34,10 +35,24 @@ public class SlidingWindowString {
             // Find if window has all characters from small string            
             if(targetMap.containsKey(charAtRight) && windowMap.get(charAtRight) <= targetMap.get(charAtRight)){
                 matchedLength++;
-                if(matchedLength == small.length()){
-                    System.out.println("Found all chars matching: " + large.substring(left, right));
-                }
             }
+            
+            while(matchedLength == small.length()){
+                if(right - left + 1 < minLength){
+                    minLength = right - left + 1;
+                    smallestSubstring = large.substring(left, right + 1);
+                    System.out.println("Found all chars matching: " + smallestSubstring);
+                }
+
+                char charAtLeft = large.charAt(left);
+                windowMap.put(charAtLeft, windowMap.get(charAtLeft)-1);
+
+                if(targetMap.containsKey(charAtLeft) && windowMap.get(charAtLeft) < targetMap.get(charAtLeft)){
+                    matchedLength--;
+                }
+                left++;
+            }
+            
             
 
             right++;
